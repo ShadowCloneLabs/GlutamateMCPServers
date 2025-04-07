@@ -1,0 +1,40 @@
+{
+  "name": "@modelcontextprotocol/server-browser-tools",
+  "version": "1.0.0",
+  "description": "MCP server for browser tools and screenshot capture",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/ShadowCloneLabs/GlutamateMCPServers",
+  "bugs": "https://github.com/ShadowCloneLabs/GlutamateMCPServers/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShadowCloneLabs/GlutamateMCPServers.git"
+  },
+  "type": "module",
+  "bin": {
+    "mcp-server-browser-tools": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && shx chmod +x dist/*.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.0",
+    "@types/ws": "^8.18.1",
+    "shx": "^0.3.4",
+    "typescript": "^5.8.3"
+  }
+}

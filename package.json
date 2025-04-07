@@ -1,0 +1,36 @@
+{
+  "name": "@modelcontextprotocol/server-browser-tools",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for browser tools and screenshot capture",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/ShadowCloneLabs/GlutamateMCPServers",
+  "bugs": "https://github.com/ShadowCloneLabs/GlutamateMCPServers/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShadowCloneLabs/GlutamateMCPServers.git"
+  },
+  "type": "module",
+  "workspaces": [
+    "src/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "watch": "npm run watch --workspaces",
+    "publish-all": "npm publish --workspaces --access public",
+    "link-all": "npm link --workspaces",
+    "dev": "npm run watch --workspaces"
+  },
+  "keywords": [
+    "mcp",
+    "browser-tools",
+    "screenshot"
+  ],
+  "packageManager": "pnpm@10.7.1",
+  "dependencies": {
+    "@modelcontextprotocol/server-browser-tools": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
