@@ -288,10 +288,6 @@ export class TestMcpServer {
       );
       Logger.log("Screenshot functionality is available and ready to use");
     });
-
-    setInterval(() => {
-      this.broadcast({ type: "SERVER_HEARTBEAT" });
-    }, 5000);
   }
 
   private broadcast(message: any): void {
