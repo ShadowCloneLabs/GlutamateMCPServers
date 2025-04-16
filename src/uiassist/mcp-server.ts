@@ -4,7 +4,7 @@ import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { IncomingMessage, ServerResponse } from "http";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { startBrowserConnector } from "./browser-connector.js";
-import { DEFAULT_MCP_PORT } from "./config.js";
+import { DEFAULT_PORT } from "./config.js";
 import * as fs from 'fs';
 import * as path from 'path';
 import { z } from "zod";
@@ -21,7 +21,7 @@ export class TestMcpServer {
   private readonly connectorPort: number;
   private readonly mcpPort: number;
 
-  constructor(connectorPort: number = 3025, mcpPort: number = DEFAULT_MCP_PORT) {
+  constructor(connectorPort: number = 3025, mcpPort: number = DEFAULT_PORT) {
     this.connectorPort = connectorPort;
     this.mcpPort = mcpPort;
     this.server = new McpServer(

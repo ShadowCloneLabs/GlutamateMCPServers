@@ -1,6 +1,6 @@
 # UI Assist MCP Server
 
-A Model Context Protocol (MCP) server that connects with the UI Assist Chrome extension to help with UI-based input in web development.
+A Model Context Protocol (MCP) server that connects with the UI Assist Chrome extension to help with UI-based input in web development. This server implements the SSE (Server-Sent Events) transport type for MCP communication.
 
 ## Description
 
@@ -36,17 +36,17 @@ npx @glutamateapp/ui-assist
 
 The server can be configured using:
 
-- `MCP_PORT`: Port for the MCP server (default: 3332)
+- `PORT`: Port for the MCP server (default: 3332)
 - `CONNECTOR_PORT`: Port for the browser connector (default: 3025)
 
 Examples:
 
 ```bash
 # Using environment variables
-MCP_PORT=3333 CONNECTOR_PORT=3026 ui-assist
+PORT=3333 CONNECTOR_PORT=3026 ui-assist
 
 # Using command line arguments
-ui-assist --mcp-port=3333 --connector-port=3026
+ui-assist --port=3333 --connector-port=3026
 ```
 
 ## Available Tools
