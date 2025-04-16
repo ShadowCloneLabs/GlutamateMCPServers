@@ -7,6 +7,7 @@ import path from "path";
 import { IncomingMessage } from "http";
 import { Socket } from "net";
 import os from "os";
+import { EventEmitter } from "events";
 
 // Function to get default downloads folder
 function getDefaultDownloadsFolder(): string {
@@ -19,14 +20,6 @@ function getDefaultDownloadsFolder(): string {
 let currentSettings = {
   screenshotPath: getDefaultDownloadsFolder(),
 };
-
-// Screenshot callback type
-interface ScreenshotCallback {
-  resolve: (value: { data: string; path?: string }) => void;
-  reject: (reason: Error) => void;
-}
-
-const screenshotCallbacks = new Map<string, ScreenshotCallback>();
 
 interface ElementSelectionData {
   tag: string;
@@ -47,6 +40,9 @@ export async function startBrowserConnector(PORT: number) {
   // Increase JSON body parser limit to 50MB to handle large screenshots
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+  // Increase the maximum number of listeners
+  EventEmitter.defaultMaxListeners = 10;
 
   // Simple endpoint for checking server status
   app.get("/status", (req, res) => {
@@ -102,18 +98,23 @@ export async function startBrowserConnector(PORT: number) {
   const browserConnector = new BrowserConnector(app, server);
 
   // Handle shutdown gracefully
-  process.on("SIGINT", () => {
+  const cleanup = async () => {
+    console.log('Cleaning up resources...');
+    await browserConnector.cleanup();
     server.close(() => {
-      console.log("Browser connector shut down");
+      console.log('HTTP server closed');
       process.exit(0);
     });
-  });
+  };
+
+  process.on('SIGINT', cleanup);
+  process.on('SIGTERM', cleanup);
 
   return browserConnector;
 }
 
 export class BrowserConnector {
-  private wss: WebSocketServer;
+  protected wss: WebSocketServer;
   private activeConnection: WebSocket | null = null;
   private app: express.Application;
   private server: any;
@@ -127,15 +128,6 @@ export class BrowserConnector {
       noServer: true,
       path: "/extension-ws",
     });
-
-    // Register the capture-screenshot endpoint
-    this.app.post(
-      "/capture-screenshot",
-      async (req: express.Request, res: express.Response) => {
-        console.log("Received request to capture screenshot");
-        await this.captureScreenshot(req, res);
-      }
-    );
 
     // Handle upgrade requests for WebSocket
     this.server.on(
@@ -167,56 +159,27 @@ export class BrowserConnector {
           // Handle screenshot response
           else if (data.type === "screenshot-data" && data.data) {
             console.log("Received screenshot data");
-
-            if (data.requestId && screenshotCallbacks.has(data.requestId)) {
-              // Get the specific callback for this request
-              const callback = screenshotCallbacks.get(data.requestId);
-              console.log(
-                `Resolving screenshot promise for requestId: ${data.requestId}`
-              );
-              callback?.resolve({ data: data.data, path: data.path });
-              screenshotCallbacks.delete(data.requestId);
-            } else {
-              // No specific requestId or not found in callbacks
-              // Get the callbacks for fallback behavior (old code path)
-              const callbacks = Array.from(screenshotCallbacks.values());
-              if (callbacks.length > 0) {
-                const callback = callbacks[0];
-                console.log("Resolving screenshot promise (fallback)");
-                callback.resolve({ data: data.data, path: data.path });
-                screenshotCallbacks.clear();
-              } else {
-                console.log("No callbacks found for screenshot");
-                // If no callbacks waiting, save the screenshot anyway
-                this.saveScreenshot(data.data);
-              }
-            }
+            // Use the current settings path if no custom path is provided
+            const savePath = data.savePath || currentSettings.screenshotPath;
+            console.log("Path being used for screenshot:", savePath);
+            console.log("Current settings path at time of screenshot:", currentSettings.screenshotPath);
+            this.saveScreenshot(data.data, savePath);
           }
           // Handle screenshot error
           else if (data.type === "screenshot-error") {
-            console.log("Received screenshot error:", data.error);
-
-            if (data.requestId && screenshotCallbacks.has(data.requestId)) {
-              // Get the specific callback for this request
-              const callback = screenshotCallbacks.get(data.requestId);
-              console.log(
-                `Rejecting screenshot promise for requestId: ${data.requestId}`
-              );
-              callback?.reject(
-                new Error(data.error || "Screenshot capture failed")
-              );
-              screenshotCallbacks.delete(data.requestId);
-            } else {
-              // Fallback behavior
-              const callbacks = Array.from(screenshotCallbacks.values());
-              if (callbacks.length > 0) {
-                const callback = callbacks[0];
-                callback.reject(
-                  new Error(data.error || "Screenshot capture failed")
-                );
-                screenshotCallbacks.clear();
-              }
-            }
+            console.error("Received screenshot error from extension:", data.error || "Unknown error");
+          }
+          // Handle save path update
+          else if (data.type === "update-save-path" && data.path) {
+            console.log("Received save path update:", data.path);
+            console.log("Previous screenshot path:", currentSettings.screenshotPath);
+            currentSettings.screenshotPath = data.path;
+            console.log("Updated screenshot path:", currentSettings.screenshotPath);
+            // Send confirmation back to extension
+            ws.send(JSON.stringify({
+              type: "path-update-confirmation",
+              success: true
+            }));
           }
           // Handle selected element data
           else if (data.type === "selected-element" && data.data) {
@@ -287,10 +250,30 @@ export class BrowserConnector {
   }
 
   // Method to save a screenshot to disk
-  private saveScreenshot(base64Data: string): string {
-    // Use configured path
-    const targetPath = currentSettings.screenshotPath;
-    console.log(`Using screenshot path: ${targetPath}`);
+  private saveScreenshot(base64Data: string, customSavePath?: string): string {
+    // Determine the target path
+    let targetPath = currentSettings.screenshotPath; // Default path
+    let filenamePrefix = "screenshot-";
+
+    console.log("Current settings path:", currentSettings.screenshotPath);
+    console.log("Custom save path provided:", customSavePath);
+
+    if (customSavePath) {
+      // Use custom path provided by the extension
+      targetPath = path.dirname(customSavePath);
+      const customFilename = path.basename(customSavePath);
+      // Use custom filename if it has an extension, otherwise treat it as directory path
+      if (path.extname(customFilename)) {
+          filenamePrefix = customFilename.replace(/\.png$/i, "") + "-";
+          // Use the directory from the custom path
+      } else {
+          // If no extension, assume customSavePath is a directory
+          targetPath = customSavePath;
+      }
+      console.log(`Using custom save path: ${targetPath}`);
+    } else {
+      console.log(`Using default screenshot path: ${targetPath}`);
+    }
 
     // Remove the data:image/png;base64, prefix if present
     const cleanBase64 = base64Data.replace(/^data:image\/png;base64,/, "");
@@ -300,7 +283,7 @@ export class BrowserConnector {
 
     // Generate a unique filename using timestamp
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-    const filename = `screenshot-${timestamp}.png`;
+    const filename = `${filenamePrefix}${timestamp}.png`;
     const fullPath = path.join(targetPath, filename);
     console.log(`Saving screenshot to: ${fullPath}`);
 
@@ -311,75 +294,16 @@ export class BrowserConnector {
     return fullPath;
   }
 
-  // Method to capture screenshot from extension
-  async captureScreenshot(req: express.Request, res: express.Response) {
-    if (!this.activeConnection) {
-      console.log("No active WebSocket connection to Chrome extension");
-      return res.status(503).json({ error: "Chrome extension not connected" });
-    }
-
-    try {
-      console.log("Starting screenshot capture...");
-      const requestId = Date.now().toString();
-
-      // Create promise that will resolve when we get the screenshot data
-      const screenshotPromise = new Promise<{ data: string; path?: string }>(
-        (resolve, reject) => {
-          console.log(
-            `Setting up screenshot callback for requestId: ${requestId}`
-          );
-          screenshotCallbacks.set(requestId, { resolve, reject });
-
-          // Send screenshot request to extension via WebSocket
-          if (this.activeConnection) {
-            this.activeConnection.send(
-              JSON.stringify({
-                type: "take-screenshot",
-                requestId: requestId,
-              })
-            );
-          } else {
-            reject(new Error("WebSocket connection lost"));
-            screenshotCallbacks.delete(requestId);
-            return;
-          }
-
-          // Set timeout for the request
-          setTimeout(() => {
-            if (screenshotCallbacks.has(requestId)) {
-              console.log(
-                `Screenshot capture timed out for requestId: ${requestId}`
-              );
-              screenshotCallbacks.delete(requestId);
-              reject(new Error("Screenshot capture timed out"));
-            }
-          }, 10000);
-        }
-      );
-
-      // Wait for screenshot data
-      console.log("Waiting for screenshot data...");
-      const { data: base64Data } = await screenshotPromise;
-      console.log("Received screenshot data, saving...");
-
-      if (!base64Data) {
-        throw new Error("No screenshot data received from Chrome extension");
+  public cleanup(): Promise<void> {
+    return new Promise((resolve) => {
+      if (this.wss) {
+        this.wss.close(() => {
+          console.log('WebSocket server closed');
+          resolve();
+        });
+      } else {
+        resolve();
       }
-
-      // Save the screenshot
-      const fullPath = this.saveScreenshot(base64Data);
-
-      res.json({
-        path: fullPath,
-        filename: path.basename(fullPath),
-      });
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : String(error);
-      console.error("Error capturing screenshot:", errorMessage);
-      res.status(500).json({
-        error: errorMessage,
-      });
-    }
+    });
   }
 }

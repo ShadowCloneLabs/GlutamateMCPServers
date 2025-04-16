@@ -1,18 +1,18 @@
 {
-  "name": "@modelcontextprotocol/server-browser-tools",
-  "version": "1.0.0",
-  "description": "MCP server for browser tools and screenshot capture",
+  "name": "@glutamateapp/ui-assist",
+  "version": "1.0.1",
+  "description": "UI Assist MCP server is a server that connect with UI Assist chrome extension to help with UI based input in web development.",
   "license": "MIT",
-  "author": "",
+  "author": "ShadowCloneResearchLabs",
   "homepage": "https://github.com/ShadowCloneLabs/GlutamateMCPServers",
   "bugs": "https://github.com/ShadowCloneLabs/GlutamateMCPServers/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ShadowCloneLabs/GlutamateMCPServers.git"
+    "url": "git+https://github.com/ShadowCloneLabs/GlutamateMCPServers.git"
   },
   "type": "module",
   "bin": {
-    "mcp-server-browser-tools": "dist/index.js"
+    "ui-assist": "dist/index.js"
   },
   "files": [
     "dist"
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.14.1",
     "@types/ws": "^8.18.1",
     "shx": "^0.3.4",
     "typescript": "^5.8.3"

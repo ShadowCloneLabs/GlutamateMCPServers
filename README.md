@@ -1,152 +1,54 @@
-# Browser Tools MCP Server
+# Glutamate MCP Servers
 
-This package provides a Model Context Protocol (MCP) server for browser tools and screenshot capture functionality.
+Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform.
 
-## Features
+## About Glutamate
 
-- Screenshot capture from browser tabs
-- Get selected HTML elements
-- Clear selected elements
-- Browser connection management
+[Glutamate](https://glutamateapp.com) is a powerful platform that simplifies the deployment and management of Model Context Protocol servers. It provides a user-friendly interface and robust tools for server administration, making it easier than ever to run and customize your MCP servers.
 
-## Installation
+## About MCP (Model Context Protocol)
 
-### Global Installation
+Model Context Protocol (MCP) is a standardized protocol for managing and serving AI models with their associated context. It enables:
 
-```bash
-npm install -g @modelcontextprotocol/server-browser-tools
-```
+- Efficient model deployment
+- Context management
+- Model versioning
+- Resource optimization
+- Scalable inference
 
-Once installed globally, you can run the server with:
+## Available Servers
 
-```bash
-mcp-server-browser-tools
-```
+Our repository includes several pre-configured MCP servers that can be installed with a single click through the Glutamate platform:
 
-### Running without Installation
+### UI Assist
 
-You can run the MCP server without installation using npx:
+Located in the `src/uiassist` directory, UI Assist is a specialized server that provides enhanced user interface capabilities for MCP servers. It offers:
 
-```bash
-npx @modelcontextprotocol/server-browser-tools
-```
+- Custom UI components
+- Improved user experience
+- Streamlined navigation
+- Modern interface design
 
-### Local Installation
+More servers will be added to this repository in the future, expanding the available options for MCP administrators.
 
-To install as a project dependency:
+## Getting Started
 
-```bash
-npm install @modelcontextprotocol/server-browser-tools
-```
-
-## Configuration
-
-You can configure the server using environment variables or command-line arguments:
-
-- `MCP_PORT`: Port for the MCP server (default: 3332)
-- `CONNECTOR_PORT`: Port for the browser connector (default: 3025)
-
-Examples:
-
-```bash
-# Using environment variables
-MCP_PORT=3333 CONNECTOR_PORT=3026 mcp-server-browser-tools
-
-# Using command line arguments
-mcp-server-browser-tools --mcp-port=3333 --connector-port=3026
-```
-
-## Cursor Integration
-
-### Setting up in Cursor
-
-To use this MCP server with Cursor:
-
-1. First, ensure the MCP server is running:
-
-   ```bash
-   # If installed globally
-   mcp-server-browser-tools
-
-   # Or using npx without installation
-   npx @modelcontextprotocol/server-browser-tools
-   ```
-
-2. Add the following configuration to Cursor's MCP section in Settings:
-
-   ```json
-   {
-     "mcpServers": {
-       "browser-tools": {
-         "url": "http://localhost:3332/sse"
-       }
-     }
-   }
-   ```
-
-3. Create or update your `mcp.json` file in your project root with the same configuration:
-
-   ```json
-   {
-     "mcpServers": {
-       "browser-tools": {
-         "url": "http://localhost:3332/sse"
-       }
-     }
-   }
-   ```
-
-4. Make sure to adjust the port number if you've configured a different port than the default (3332).
-
-5. Restart Cursor if necessary for the changes to take effect.
-
-6. You can now use browser tools in your Cursor AI conversations.
-
-## Available Tools
-
-This MCP server provides the following tools:
-
-- `capture_screenshot`: Take a screenshot of the current browser tab
-- `get_selected_elements`: Retrieve selected HTML elements
-- `clear_selected_elements`: Clear the list of selected elements
-
-## Development
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/ShadowCloneLabs/GlutamateMCPServers.git
-cd GlutamateMCPServers
-```
-
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Building the project
-
-```bash
-npm run build
-```
-
-### Watching for changes
-
-```bash
-npm run watch
-```
-
-### Running locally during development
-
-```bash
-npm run dev
-```
-
-## Repository
-
-[https://github.com/ShadowCloneLabs/GlutamateMCPServers](https://github.com/ShadowCloneLabs/GlutamateMCPServers)
+1. Visit [glutamateapp.com](https://glutamateapp.com)
+2. Download the app
+3. Choose your desired MCP server from the available options
+4. Click to install and just connect
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contributing
+
+We welcome contributions to improve our MCP servers. Please feel free to submit pull requests, report issues, or suggest new features.
+
+## Support
+
+For support and questions, please:
+
+- Join our [Discord community](https://discord.gg/6fXp2yTbMd)
+  - Submit you mcps that are supported

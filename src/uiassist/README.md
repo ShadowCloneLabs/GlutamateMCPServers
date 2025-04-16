@@ -1,6 +1,6 @@
-# Browser Tools MCP Server
+# UI Assist MCP Server
 
-A Model Context Protocol (MCP) server for browser tools and screenshot capture.
+A Model Context Protocol (MCP) server that connects with the UI Assist Chrome extension to help with UI-based input in web development.
 
 ## Description
 
@@ -15,13 +15,13 @@ This MCP server provides tools to interact with a browser, allowing AI assistant
 ### Global Installation
 
 ```bash
-npm install -g @modelcontextprotocol/server-browser-tools
+npm install -g @glutamateapp/ui-assist
 ```
 
 Once installed globally, you can run the server directly:
 
 ```bash
-mcp-server-browser-tools
+ui-assist
 ```
 
 ### Using npx
@@ -29,7 +29,7 @@ mcp-server-browser-tools
 You can run the server without installation using npx:
 
 ```bash
-npx @modelcontextprotocol/server-browser-tools
+npx @glutamateapp/ui-assist
 ```
 
 ## Configuration
@@ -43,23 +43,13 @@ Examples:
 
 ```bash
 # Using environment variables
-MCP_PORT=3333 CONNECTOR_PORT=3026 mcp-server-browser-tools
+MCP_PORT=3333 CONNECTOR_PORT=3026 ui-assist
 
 # Using command line arguments
-mcp-server-browser-tools --mcp-port=3333 --connector-port=3026
+ui-assist --mcp-port=3333 --connector-port=3026
 ```
 
 ## Available Tools
-
-### `capture_screenshot`
-
-Takes a screenshot of the current browser tab.
-
-**Example usage in Cursor AI:**
-
-```
-Please capture a screenshot of my current browser tab.
-```
 
 ### `get_selected_elements`
 
@@ -103,10 +93,10 @@ To use this MCP server with Cursor:
 
    ```bash
    # If installed globally
-   mcp-server-browser-tools
+   ui-assist
 
    # Or using npx
-   npx @modelcontextprotocol/server-browser-tools
+   npx @glutamateapp/ui-assist
    ```
 
 2. Add the following configuration to Cursor's MCP section:

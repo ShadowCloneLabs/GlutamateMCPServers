@@ -4,6 +4,10 @@ import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { IncomingMessage, ServerResponse } from "http";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { startBrowserConnector } from "./browser-connector.js";
+import { DEFAULT_MCP_PORT } from "./config.js";
+import * as fs from 'fs';
+import * as path from 'path';
+import { z } from "zod";
 
 export const Logger = {
   log: (...args: any[]) => console.log(...args),
@@ -14,8 +18,12 @@ export class TestMcpServer {
   private readonly server: McpServer;
   private sseTransport: SSEServerTransport | null = null;
   private browserConnector: any = null;
+  private readonly connectorPort: number;
+  private readonly mcpPort: number;
 
-  constructor() {
+  constructor(connectorPort: number = 3025, mcpPort: number = DEFAULT_MCP_PORT) {
+    this.connectorPort = connectorPort;
+    this.mcpPort = mcpPort;
     this.server = new McpServer(
       {
         name: "Screenshot MCP Server",
@@ -34,80 +42,8 @@ export class TestMcpServer {
 
   private registerTools(): void {
     this.server.tool(
-      "capture_screenshot",
-      "Capture a screenshot of the current browser tab",
-      {},
-      async () => {
-        try {
-          const format = "png";
-
-          if (!this.browserConnector) {
-            return {
-              content: [
-                {
-                  type: "text",
-                  text: "Error: Browser connector not initialized. Please ensure the browser extension is running.",
-                },
-              ],
-            };
-          }
-
-          const screenshotResult = await new Promise<{
-            path: string;
-            filename: string;
-          }>(async (resolve, reject) => {
-            try {
-              const response = await fetch(
-                "http://localhost:3025/capture-screenshot",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ format }),
-                }
-              );
-
-              if (!response.ok) {
-                throw new Error(
-                  `Screenshot capture failed: ${response.statusText}`
-                );
-              }
-
-              const result = await response.json();
-              resolve(result);
-            } catch (error) {
-              reject(error);
-            }
-          });
-
-          return {
-            content: [
-              {
-                type: "text",
-                text: `Screenshot captured successfully!\nPath: ${screenshotResult.path}\nFilename: ${screenshotResult.filename}`,
-              },
-            ],
-          };
-        } catch (error) {
-          Logger.error(`Screenshot capture error:`, error);
-          return {
-            content: [
-              {
-                type: "text",
-                text: `Error capturing screenshot: ${
-                  error instanceof Error ? error.message : String(error)
-                }`,
-              },
-            ],
-          };
-        }
-      }
-    );
-
-    this.server.tool(
       "get_selected_elements",
-      "Get information about HTML elements selected using the browser extension",
+      "Get information about HTML elements selected using the browser extension using ui-assist",
       {},
       async () => {
         try {
@@ -123,7 +59,7 @@ export class TestMcpServer {
           }
 
           const response = await fetch(
-            "http://localhost:3025/selected-elements"
+            `http://localhost:${this.connectorPort}/selected-elements`
           );
           if (!response.ok) {
             throw new Error(
@@ -189,7 +125,7 @@ export class TestMcpServer {
 
     this.server.tool(
       "clear_selected_elements",
-      "Clear the list of selected HTML elements",
+      "Clear the list of selected HTML elements using ui-assist",
       {},
       async () => {
         try {
@@ -205,7 +141,7 @@ export class TestMcpServer {
           }
 
           const response = await fetch(
-            "http://localhost:3025/selected-elements",
+            `http://localhost:${this.connectorPort}/selected-elements`,
             {
               method: "DELETE",
             }
@@ -272,10 +208,9 @@ export class TestMcpServer {
 
     // Initialize the browser connector
     try {
-      // Use a different port for the browser connector
-      const browserConnectorPort = 3025;
-      this.browserConnector = await startBrowserConnector(browserConnectorPort);
-      Logger.log(`Browser connector started on port ${browserConnectorPort}`);
+      // Use the configured port for the browser connector
+      this.browserConnector = await startBrowserConnector(this.connectorPort);
+      Logger.log(`Browser connector started on port ${this.connectorPort}`);
     } catch (error) {
       Logger.error("Failed to start browser connector:", error);
     }
@@ -286,7 +221,7 @@ export class TestMcpServer {
       Logger.log(
         `Message endpoint available at http://localhost:${port}/messages`
       );
-      Logger.log("Screenshot functionality is available and ready to use");
+      Logger.log("Element selection tools are available and ready to use");
     });
   }
 
