@@ -1,0 +1,32 @@
+{
+    "name": "Your MCP Server Name",
+    "description": "A detailed description of your server and its capabilities",
+    "version": "0.1.0",
+    "releaseDate": "YYYY-MM-DD",
+    "author": "Your Name or Organization",
+    "license": "License Type (e.g., MIT, Apache 2.0)",
+    "repositoryUrl": "https://github.com/username/repository",
+    "implementationLanguage": "Programming Language Used",
+    "connectionType": "sse/stdio",
+    "runtimeRequirements": "Runtime Requirements (e.g., Node.js, Docker)",
+    "packageName": "npm-package-name",
+    "color": "#HEXCOLOR",
+    "tools": [
+      {
+        "name": "tool_name",
+        "description": "Description of what this tool does"
+      }
+    ],
+    "environmentVariables": [
+      {
+        "variableName": "VARIABLE_NAME",
+        "description": "Purpose of this environment variable",
+        "isRequired": "true/false",
+        "defaultValue": "default value if any"
+      }
+    ],
+    "notes": {
+      "connectionType": "Must be lowercase 'sse' or 'stdio' only",
+      "sseRequirements": "SSE servers must accept --port command line argument"
+    }
+  }
