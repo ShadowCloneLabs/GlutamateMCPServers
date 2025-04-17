@@ -16,9 +16,9 @@ Model Context Protocol (MCP) is a standardized protocol for managing and serving
 - Resource optimization
 - Scalable inference
 
-## Available Servers
+## Custom Made Servers
 
-Our repository includes several pre-configured MCP servers that can be installed with a single click through the Glutamate platform:
+Our repository includes several custom MCP servers that are created by Glutamate Team , We support all stdio and sse server that are node based on our glutamate app
 
 ### UI Assist
 
