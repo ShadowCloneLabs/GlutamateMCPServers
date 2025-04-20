@@ -1,6 +1,16 @@
 # Glutamate MCP Servers
 
+[![Join Our Discord](https://img.shields.io/badge/Join%20Our%20Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/6fXp2yTbMd)
+
 Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform.
+
+## 🎥 Introduction Video
+
+<div align="center">
+  <img src="assets/GlutamateIntro.gif" alt="Glutamate Intro GIF" width="600"/>
+  
+  **[▶️ Watch Full Video on YouTube](https://youtu.be/Qwt_6Y0RLXw)**
+</div>
 
 ## About Glutamate
 
@@ -48,7 +58,4 @@ We welcome contributions to improve our MCP servers. Please feel free to submit 
 
 ## Support
 
-For support and questions, please:
-
-- Join our [Discord community](https://discord.gg/6fXp2yTbMd)
-  - Submit you mcps that are supported
+For support and questions, please visit our community channels.
