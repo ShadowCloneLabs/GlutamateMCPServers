@@ -1,6 +1,10 @@
-# Glutamate MCP Servers
+<div align="center">
+  <a href="https://discord.gg/6fXp2yTbMd" style="display: inline-block; border-radius: 10px; overflow: hidden;">
+    <img src="https://img.shields.io/badge/Join%20Our%20Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white&rounded=true" alt="Join Our Discord" width="200"/>
+  </a>
+</div>
 
-[![Join Our Discord](https://img.shields.io/badge/Join%20Our%20Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/6fXp2yTbMd)
+# Glutamate MCP Servers
 
 Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform.
 
@@ -9,7 +13,9 @@ Welcome to the Glutamate MCP Servers repository! This project contains a collect
 <div align="center">
   <img src="assets/GlutamateIntro.gif" alt="Glutamate Intro GIF" width="600"/>
   
-  **[▶️ Watch Full Video on YouTube](https://youtu.be/Qwt_6Y0RLXw)**
+  <a href="https://youtu.be/Qwt_6Y0RLXw" style="display: inline-block; border-radius: 10px; overflow: hidden;">
+    <img src="https://img.shields.io/badge/Watch%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube" width="180"/>
+  </a>
 </div>
 
 ## About Glutamate
