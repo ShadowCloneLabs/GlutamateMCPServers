@@ -70,7 +70,7 @@ More servers will be added to this repository in the future, expanding the avail
 3. Choose your desired MCP server from the available options
 4. Click to install and just connect
 
-## List of MCP servers
+## List of MCP servers (adding more everyday )
 
 ### 21st.dev Magic AI Agent
 Magic Component Platform (MCP) is a powerful AI-driven tool that helps developers create beautiful, modern UI components instantly through natural language descriptions. It integrates seamlessly with popular IDEs and provides a streamlined workflow for UI development. Features include AI-powered UI generation, multi-IDE support, modern component library, real-time preview, TypeScript support, SVGL integration for brand assets, and component enhancement capabilities.  
