@@ -22,6 +22,14 @@ Welcome to the Glutamate MCP Servers repository! This project contains a collect
 
 [Glutamate](https://glutamateapp.com) is a powerful platform that simplifies the deployment and management of Model Context Protocol servers. It provides a user-friendly interface and robust tools for server administration, making it easier than ever to run and customize your MCP servers.
 
+Key Features:
+
+- 🔒 All keys are securely stored locally
+- ⚡ Install & Start/Stop MCP servers on your local machine
+- 💻 Full support for both stdio & SSE protocols
+- 📦 No Node.js installation required on your system
+- 🎁 100% free to use
+
 ## About MCP (Model Context Protocol)
 
 Model Context Protocol (MCP) is a standardized protocol for managing and serving AI models with their associated context. It enables:
