@@ -10,6 +10,28 @@ This MCP server provides tools to interact with a browser, allowing AI assistant
 - Get and manipulate selected HTML elements
 - Clear selections and perform other browser interactions
 
+## Chrome Extension
+
+To enable browser interaction capabilities, you need to install the UI Assist Chrome extension:
+
+<img src="https://chromewebstore.google.com/detail/cgpdancbdkpljflelfjpgdafebneible/icon" width="48" height="48" alt="UI Assist Extension Icon" style="vertical-align: middle"> [UI Assist Extension](https://chromewebstore.google.com/detail/cgpdancbdkpljflelfjpgdafebneible?utm_source=item-share-cb)
+
+### Features
+
+- 🔍 Element selection in browser tabs
+- 📸 Screenshot capture support
+- 🔄 Real-time synchronization with MCP server
+- 🛡️ Secure local communication
+
+### Installation Steps
+
+1. Click the extension link above to open the Chrome Web Store
+2. Click "Add to Chrome" to install the extension
+3. Once installed, you'll see the UI Assist icon in your browser toolbar
+4. Make sure the MCP server is running locally before using the extension you shoud be able to see connected
+
+Once we reach 100 stars , we will open source the code extension code as well
+
 ## Installation
 
 ### Global Installation
