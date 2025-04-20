@@ -31,7 +31,7 @@ Key Features:
 - ⚡ Install & Start/Stop MCP servers on your local machine
 - 💻 Full support for both stdio & SSE protocols
 - 📦 No Node.js installation required on your system
-- 🎁 100% free to use
+- 🎁 100% free to use , now and forever
 - Avaible on Windows , Linux and Mac (coming soon)
 
 ## About MCP (Model Context Protocol)
