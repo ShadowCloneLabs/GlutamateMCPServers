@@ -6,7 +6,8 @@
 
 # Glutamate MCP Servers
 
-Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform.
+Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform. We support all stdio and sse servers by any creators 
+
 
 ## 🎥 Introduction Video
 
@@ -22,7 +23,7 @@ Welcome to the Glutamate MCP Servers repository! This project contains a collect
 
 ## About Glutamate
 
-[Glutamate](https://glutamateapp.com) is a powerful platform that simplifies the deployment and management of Model Context Protocol servers. It provides a user-friendly interface and robust tools for server administration, making it easier than ever to run and customize your MCP servers.
+[Glutamate](https://glutamateapp.com) is a powerful desktop platform that simplifies the deployment and management of Model Context Protocol servers. It provides a user-friendly interface and robust tools for server administration, making it easier than ever to run and customize your MCP servers.
 
 Key Features:
 
@@ -31,6 +32,7 @@ Key Features:
 - 💻 Full support for both stdio & SSE protocols
 - 📦 No Node.js installation required on your system
 - 🎁 100% free to use
+- Avaible on Windows , Linux and Mac (coming soon)
 
 ## About MCP (Model Context Protocol)
 
