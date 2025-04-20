@@ -11,11 +11,13 @@ Welcome to the Glutamate MCP Servers repository! This project contains a collect
 ## 🎥 Introduction Video
 
 <div align="center">
-  <img src="assets/GlutamateIntro.gif" alt="Glutamate Intro GIF" width="600"/>
+  <img src="./assets\GlutamateIntro__.gif" alt="Glutamate Intro GIF" width="600" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/>
   
-  <a href="https://youtu.be/Qwt_6Y0RLXw" style="display: inline-block; border-radius: 10px; overflow: hidden;">
-    <img src="https://img.shields.io/badge/Watch%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube" width="180"/>
-  </a>
+  <p align="center">
+    <a href="https://youtu.be/Qwt_6Y0RLXw" style="display: inline-block; border-radius: 10px; overflow: hidden;">
+      <img src="https://img.shields.io/badge/Watch%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white&rounded=true" alt="Watch on YouTube" width="180"/>
+    </a>
+  </p>
 </div>
 
 ## About Glutamate
