@@ -34,15 +34,6 @@ Key Features:
 - 🎁 100% free to use , now and forever
 - Avaible on Windows , Linux and Mac (coming soon)
 
-## About MCP (Model Context Protocol)
-
-Model Context Protocol (MCP) is a standardized protocol for managing and serving AI models with their associated context. It enables:
-
-- Efficient model deployment
-- Context management
-- Model versioning
-- Resource optimization
-- Scalable inference
 
 ## Road Map:
 - Auto Sync (server config and port) with any client (cursor , windsurf , cline , roocode etc..) (coming in next update!!)
