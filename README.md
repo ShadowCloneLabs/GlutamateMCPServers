@@ -6,7 +6,7 @@
 
 # Glutamate MCP Servers
 
-Welcome to the Glutamate MCP Servers repository! This project contains a collection of customizable and pre-built MCP (Model Context Protocol) servers that can be easily deployed and managed through the Glutamate platform. We support all stdio and sse servers by any creators 
+Welcome to the Glutamate MCP Servers repository! This project contains a collection of  MCPs (Model Context Protocol) servers that are made by gluamate team can be easily deployed and managed through the Glutamate platform. We support all stdio and sse servers by any creators.
 
 
 ## 🎥 Introduction Video
@@ -44,6 +44,9 @@ Model Context Protocol (MCP) is a standardized protocol for managing and serving
 - Resource optimization
 - Scalable inference
 
+## Road Map:
+- Auto Sync with any client (coming in next update!!)
+
 ## Custom Made Servers
 
 Our repository includes several custom MCP servers that are created by Glutamate Team , We support all stdio and sse server that are node based on our glutamate app
@@ -59,6 +62,7 @@ Located in the `src/uiassist` directory, UI Assist is a specialized server that 
 
 More servers will be added to this repository in the future, expanding the available options for MCP administrators.
 
+
 ## Getting Started
 
 1. Visit [glutamateapp.com](https://glutamateapp.com)
@@ -66,9 +70,12 @@ More servers will be added to this repository in the future, expanding the avail
 3. Choose your desired MCP server from the available options
 4. Click to install and just connect
 
+## List of MCP severs comming soon
+
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project repo is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contributing
 
