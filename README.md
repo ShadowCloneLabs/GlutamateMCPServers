@@ -11,7 +11,7 @@ Welcome to the Glutamate MCP Servers repository! This project contains a collect
 ## 🎥 Introduction Video
 
 <div align="center">
-  <img src="./assets/GlutamateIntro_.gif" alt="Glutamate Intro GIF" width="600" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/>
+  <img src="./assets\GlutamateIntro__.gif" alt="Glutamate Intro GIF" width="600" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/>
   
   <p align="center">
     <a href="https://youtu.be/Qwt_6Y0RLXw" style="display: inline-block; border-radius: 10px; overflow: hidden;">
