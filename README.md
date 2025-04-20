@@ -45,7 +45,11 @@ Model Context Protocol (MCP) is a standardized protocol for managing and serving
 - Scalable inference
 
 ## Road Map:
-- Auto Sync with any client (coming in next update!!)
+- Auto Sync (server config and port) with any client (cursor , windsurf , cline , roocode etc..) (coming in next update!!)
+- Auto start of mcp severs on start of glutamate (based on user settings)
+- Oath login for mcps to fetch api keys
+- User submission of servers
+
 
 ## Custom Made Servers
 
