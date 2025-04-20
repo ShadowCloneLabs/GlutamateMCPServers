@@ -215,4 +215,4 @@ For support and questions, please visit our community channels.
 
 ## License
 
-This project repo is licensed under the MIT License - see the LICENSE file for details.
+This repo (the mcp servers created by glutamate team) is licensed under the MIT License - see the LICENSE file for details.
