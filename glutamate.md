@@ -20,6 +20,8 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
   "runtimeRequirements": "Runtime Requirements (e.g., Node.js, Docker)",
   "packageName": "npm-package-name",
   "color": "#HEXCOLOR",
+  "defaultPort": 5000,
+  "imageUrl": "https://example.com/server-icon.svg",
   "tools": [
     {
       "name": "tool_name",
@@ -60,6 +62,8 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
 | `runtimeRequirements`    | What's needed to run the server            | "Node.js", "Docker", "Python 3.9+"       |
 | `packageName`            | Package name in the relevant registry      | "@namespace/package-name"                |
 | `color`                  | A hex color code representing your server  | "#3ECF8E"                                |
+| `defaultPort`            | Default port number for the server         | 3000                                     |
+| `imageUrl`               | URL to the server's icon or logo image     | "https://example.com/server-icon.png"    |
 
 ### Important Requirements
 
@@ -110,6 +114,8 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
   "runtimeRequirements": "Node.js",
   "packageName": "@yourusername/simple-mcp-server",
   "color": "#4287f5",
+  "defaultPort": 3000,
+  "imageUrl": "https://example.com/simple-mcp-server-icon.png",
   "tools": [
     {
       "name": "hello_world",
@@ -136,6 +142,8 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
   "runtimeRequirements": "Node.js",
   "packageName": "@glutamateapp/ui-assist",
   "color": "#FFFFFF",
+  "defaultPort": 3025,
+  "imageUrl": "https://shadowclonelabs.com/ui-assist-icon.png",
   "tools": [
     {
       "name": "get_selected_elements",

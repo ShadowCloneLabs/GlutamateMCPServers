@@ -11,6 +11,8 @@
     "runtimeRequirements": "Runtime Requirements (e.g., Node.js, Docker)",
     "packageName": "npm-package-name",
     "color": "#HEXCOLOR",
+    "defaultPort": 6000,
+    "imageUrl": "https://example.com/server-icon.svg",
     "tools": [
       {
         "name": "tool_name",
