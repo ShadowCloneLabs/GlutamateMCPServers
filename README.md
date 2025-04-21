@@ -35,10 +35,10 @@ Key Features:
 
 ## Road Map:
 
-- Auto Sync (server config and port) with any client (cursor , windsurf , cline , roocode etc..) (coming in next update!!)
-- Auto start of mcp severs on start of glutamate (based on user settings)
-- Oath login for mcps to fetch api keys
-- User submission of servers
+- [x] Auto Sync (server config and port) with any client (cursor , windsurf , cline , roocode etc..) (Added in v0.0.5)
+- [ ] Auto start of mcp severs on start of glutamate (based on user settings)
+- [ ] Oath login for mcps to fetch api keys
+- [ ] User submission of servers
 
 ## Custom Made Servers
 
