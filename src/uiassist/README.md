@@ -9,6 +9,62 @@ This MCP server provides tools to interact with a browser, allowing AI assistant
 - Capture screenshots of current browser tabs
 - Get and manipulate selected HTML elements
 - Clear selections and perform other browser interactions
+- Make targeted changes to specific UI elements through natural language instructions
+
+## Interactive Element Selection and Manipulation
+
+UI Assist enables precise control over web elements through an intuitive selection interface:
+
+![UI Assist Selection Interface](assets/3.png)
+
+With UI Assist, you can:
+
+1. Select specific elements on any webpage using the point-and-click interface
+2. Give natural language instructions in Cursor to modify only the selected elements
+3. Make targeted changes to styling, content, or structure of selected components
+4. Preview changes before they are applied
+5. Apply modifications while maintaining the rest of the page intact
+
+For example, you could:
+
+- Select a specific card component and ask "make this card's background lighter"
+- Highlight multiple buttons and request "change these buttons to a purple gradient theme"
+- Select a navigation menu and say "add a drop shadow to this nav bar"
+
+![Financial Dashboard Example](assets/2.png)
+![Research Platform Example](assets/1.png)
+
+## Wireframing and AI Generation
+
+UI Assist includes powerful wireframing tools that enable rapid prototyping and AI-powered generation:
+
+### Wireframe Tools
+
+- **Draw Tool**: Freehand drawing for quick sketches and annotations
+- **Rectangle Tool**: Create boxes and containers for layout planning
+- **Circle Tool**: Add circular elements and icons
+- **Text Tool**: Add text placeholders and labels
+
+### Screenshot and Generation Workflow
+
+1. Use the wireframing tools to sketch your desired layout
+2. Add annotations and placeholder text to guide the AI
+3. Take a screenshot of your wireframe using the "Take Screenshot" button
+4. Ask Cursor AI to generate the actual implementation based on your wireframe
+
+Example instructions you can give to Cursor after creating a wireframe:
+
+- "Generate a React component matching this wireframe layout"
+- "Create a responsive design based on this sketch"
+- "Implement this card component with Tailwind CSS"
+- "Generate a modern UI design following this structure"
+
+The combination of visual wireframing and AI generation allows for:
+
+- Rapid prototyping of UI concepts
+- Clear communication of design intentions
+- Immediate implementation of wireframe designs
+- Iterative refinement through visual feedback
 
 ## Chrome Extension
 
@@ -150,7 +206,6 @@ Add to your `claude_desktop_config.json`:
   }
 }
 ```
-
 
 ## Development
 
