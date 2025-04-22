@@ -26,7 +26,7 @@ export class TestMcpServer {
     this.mcpPort = mcpPort;
     this.server = new McpServer(
       {
-        name: "Screenshot MCP Server",
+        name: "UI Assist MCP Server",
         version: "0.1.0",
       },
       {

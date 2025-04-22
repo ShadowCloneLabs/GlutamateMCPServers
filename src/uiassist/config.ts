@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const DEFAULT_PORT = 3332;
+export const DEFAULT_PORT = 7451;
 export const DEFAULT_CONNECTOR_PORT = 3025;
 
 export function getConfiguredPorts() {

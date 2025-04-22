@@ -100,15 +100,25 @@ export async function startBrowserConnector(PORT: number) {
   // Handle shutdown gracefully
   const cleanup = async () => {
     console.log('Cleaning up resources...');
-    await browserConnector.cleanup();
-    server.close(() => {
-      console.log('HTTP server closed');
-      process.exit(0);
-    });
+    try {
+      await browserConnector.cleanup();
+      server.close(() => {
+        console.log('HTTP server closed');
+        // Force exit after 1 second if graceful shutdown fails
+        setTimeout(() => {
+          console.log('Forcing process exit after timeout');
+          process.exit(0);
+        }, 1000);
+      });
+    } catch (err) {
+      console.error('Error during cleanup:', err);
+      process.exit(1);
+    }
   };
 
   process.on('SIGINT', cleanup);
   process.on('SIGTERM', cleanup);
+  process.on('beforeExit', cleanup);
 
   return browserConnector;
 }
@@ -296,10 +306,40 @@ export class BrowserConnector {
 
   public cleanup(): Promise<void> {
     return new Promise((resolve) => {
+      // First close any active connection
+      if (this.activeConnection) {
+        try {
+          this.activeConnection.close(1000, 'Server shutting down');
+          this.activeConnection = null;
+        } catch (err) {
+          console.error('Error closing active connection:', err);
+        }
+      }
+
+      // Then close the WebSocket server
       if (this.wss) {
+        // Close all existing connections
+        this.wss.clients.forEach((client) => {
+          try {
+            client.close(1000, 'Server shutting down');
+          } catch (err) {
+            console.error('Error closing client connection:', err);
+          }
+        });
+
+        // Close the server
         this.wss.close(() => {
           console.log('WebSocket server closed');
-          resolve();
+          
+          // Close the HTTP server
+          if (this.server) {
+            this.server.close(() => {
+              console.log('HTTP server closed');
+              resolve();
+            });
+          } else {
+            resolve();
+          }
         });
       } else {
         resolve();
