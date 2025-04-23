@@ -20,19 +20,36 @@ UI Assist enables precise control over web elements through an intuitive selecti
 With UI Assist, you can:
 
 1. Select specific elements on any webpage using the point-and-click interface
-2. Give natural language instructions in Cursor to modify only the selected elements
+2. Give natural language instructions directly in the UI to modify only the selected elements
 3. Make targeted changes to styling, content, or structure of selected components
 4. Preview changes before they are applied
 5. Apply modifications while maintaining the rest of the page intact
 
 For example, you could:
 
-- Select a specific card component and ask "make this card's background lighter"
-- Highlight multiple buttons and request "change these buttons to a purple gradient theme"
-- Select a navigation menu and say "add a drop shadow to this nav bar"
+- Select a specific card component and type "make this card's background lighter" directly in the UI
+- Highlight multiple buttons and enter "change these buttons to a purple gradient theme" in the instruction field
+- Select a navigation menu and input "add a drop shadow to this nav bar" in the UI
 
 ![Financial Dashboard Example](assets/2.png)
 ![Research Platform Example](assets/1.png)
+
+## Instructions Feature
+
+UI Assist provides a powerful instructions interface that allows you to modify selected elements through natural language commands:
+
+![Instructions Interface](assets/instuctions.png)
+
+The instructions feature allows you to:
+
+**Direct Element Targeting**: Instructions are applied specifically to the selected elements, ensuring precise modifications
+
+Example instructions you can use:
+
+- "Change this icon to a home icon"
+- "Make this button larger and round"
+- "Update the text color to dark blue"
+- "Add a subtle hover effect"
 
 ## Wireframing and AI Generation
 
@@ -144,12 +161,12 @@ ui-assist --port=3333 --connector-port=3026
 
 ### `get_selected_elements`
 
-Retrieves HTML elements that have been selected in the browser.
+Retrieves HTML elements that have been selected in the browser, including any instructions provided directly in the UI.
 
 **Example usage in Cursor AI:**
 
 ```
-I've selected some elements in my browser. Can you retrieve them and tell me about their structure?
+I've selected some elements in my browser and added instructions. Can you retrieve them and tell me about their structure and instructions?
 ```
 
 ### `clear_selected_elements`
@@ -162,6 +179,13 @@ Clears the list of selected elements.
 Please clear any selected elements from previous operations.
 ```
 
+## Roadmap
+
+### Upcoming Features
+
+- **Element Movement**: Soon you'll be able to:
+  - Drag and drop selected elements to new positions
+
 ## Complete Example Workflow
 
 Here's a complete workflow example:
@@ -170,8 +194,8 @@ Here's a complete workflow example:
 2. Open Cursor and ensure it's configured to use the MCP server
 3. In a browser, navigate to a webpage
 4. In Cursor, ask the AI: "Take a screenshot of my current browser page."
-5. Select some HTML elements in the browser
-6. In Cursor, ask the AI: "Retrieve the HTML elements I just selected and explain their structure."
+5. Select some HTML elements in the browser and enter instructions directly in the UI
+6. In Cursor, ask the AI: "Retrieve the selected elements and explain their structure and follow instructions."
 7. Once finished, ask the AI: "Clear the selected elements."
 
 ## Integration with AI Assistants

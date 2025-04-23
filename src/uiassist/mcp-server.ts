@@ -95,6 +95,7 @@ export class TestMcpServer {
   Classes: ${el.classes?.join(", ") || "none"}
   Text: ${el.text || "none"}
   Attributes: ${attributesStr || "none"}
+  Instruction: ${el.instruction || "none"}
 `;
             })
             .join("\n");

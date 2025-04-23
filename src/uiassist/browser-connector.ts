@@ -27,6 +27,7 @@ interface ElementSelectionData {
   classes: string[];
   text: string;
   attributes: { name: string; value: string }[];
+  instruction?: string;
 }
 
 const selectedElements: ElementSelectionData[] = [];
@@ -226,7 +227,12 @@ export class BrowserConnector {
           // Handle selected element data
           else if (data.type === "selected-element" && data.data) {
             console.log("Received selected element data:", data.data);
-            selectedElements.push(data.data);
+            // Ensure instruction is included if present
+            const elementData: ElementSelectionData = {
+              ...data.data,
+              instruction: data.data.instruction || undefined
+            };
+            selectedElements.push(elementData);
           }
         } catch (error) {
           console.error("Error processing WebSocket message:", error);
