@@ -94,21 +94,36 @@ export async function startBrowserConnector(PORT: number) {
     console.log(`Browser connector listening on http://127.0.0.1:${PORT}`);
   });
 
+  // Set TCP socket options for faster cleanup
+  server.on('connection', (socket) => {
+    socket.setNoDelay(true);
+    
+    // Remove the aggressive timeout that was causing auto-closing
+    socket.setKeepAlive(true, 60000); // Keep connections alive for 60 seconds
+  });
+
   // Initialize browser connector with the server
   const browserConnector = new BrowserConnector(app, server);
 
+  let isShuttingDown = false; // Flag to track shutdown state
+
   // Handle shutdown gracefully
   const cleanup = async () => {
+    // Prevent multiple cleanup calls
+    if (isShuttingDown) {
+      console.log('Cleanup already in progress...');
+      return;
+    }
+
+    isShuttingDown = true;
     console.log('Cleaning up resources...');
+    
     try {
       await browserConnector.cleanup();
+      
       server.close(() => {
         console.log('HTTP server closed');
-        // Force exit after 1 second if graceful shutdown fails
-        setTimeout(() => {
-          console.log('Forcing process exit after timeout');
-          process.exit(0);
-        }, 1000);
+        process.exit(0);
       });
     } catch (err) {
       console.error('Error during cleanup:', err);
@@ -116,9 +131,9 @@ export async function startBrowserConnector(PORT: number) {
     }
   };
 
+  // Only handle SIGINT and SIGTERM for cleanup
   process.on('SIGINT', cleanup);
   process.on('SIGTERM', cleanup);
-  process.on('beforeExit', cleanup);
 
   return browserConnector;
 }
@@ -128,6 +143,7 @@ export class BrowserConnector {
   private activeConnection: WebSocket | null = null;
   private app: express.Application;
   private server: any;
+  private isClosing: boolean = false;
 
   constructor(app: express.Application, server: any) {
     this.app = app;
@@ -137,13 +153,17 @@ export class BrowserConnector {
     this.wss = new WebSocketServer({
       noServer: true,
       path: "/extension-ws",
+      clientTracking: true
     });
 
     // Handle upgrade requests for WebSocket
     this.server.on(
       "upgrade",
       (request: IncomingMessage, socket: Socket, head: Buffer) => {
-        if (request.url === "/extension-ws") {
+        if (request.url === "/extension-ws" && !this.isClosing) {
+          socket.setNoDelay(true);
+          socket.setKeepAlive(true, 60000); // Keep connections alive for 60 seconds
+          
           this.wss.handleUpgrade(request, socket, head, (ws: WebSocket) => {
             this.wss.emit("connection", ws, request);
           });
@@ -152,8 +172,20 @@ export class BrowserConnector {
     );
 
     this.wss.on("connection", (ws: WebSocket) => {
+      if (this.isClosing) {
+        ws.close(1000, 'Server is shutting down');
+        return;
+      }
+
       console.log("Chrome extension connected via WebSocket");
       this.activeConnection = ws;
+
+      ws.on("close", () => {
+        console.log("Chrome extension disconnected");
+        if (this.activeConnection === ws) {
+          this.activeConnection = null;
+        }
+      });
 
       ws.on("message", (message: Buffer | string) => {
         try {
@@ -198,13 +230,6 @@ export class BrowserConnector {
           }
         } catch (error) {
           console.error("Error processing WebSocket message:", error);
-        }
-      });
-
-      ws.on("close", () => {
-        console.log("Chrome extension disconnected");
-        if (this.activeConnection === ws) {
-          this.activeConnection = null;
         }
       });
     });
@@ -306,7 +331,8 @@ export class BrowserConnector {
 
   public cleanup(): Promise<void> {
     return new Promise((resolve) => {
-      // First close any active connection
+      this.isClosing = true;
+
       if (this.activeConnection) {
         try {
           this.activeConnection.close(1000, 'Server shutting down');
@@ -316,9 +342,7 @@ export class BrowserConnector {
         }
       }
 
-      // Then close the WebSocket server
       if (this.wss) {
-        // Close all existing connections
         this.wss.clients.forEach((client) => {
           try {
             client.close(1000, 'Server shutting down');
@@ -327,11 +351,9 @@ export class BrowserConnector {
           }
         });
 
-        // Close the server
         this.wss.close(() => {
           console.log('WebSocket server closed');
           
-          // Close the HTTP server
           if (this.server) {
             this.server.close(() => {
               console.log('HTTP server closed');
