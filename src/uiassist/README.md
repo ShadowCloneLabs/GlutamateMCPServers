@@ -90,7 +90,20 @@ Once we reach 100 stars , we will open source the code extension code as well
 
 ## Installation
 
-### Global Installation
+### Option 1: One-Click Installation via Glutamate App (Recommended)
+
+The easiest way to install and set up UI Assist is through the Glutamate app:
+
+1. Download and install [Glutamate](https://glutamate.app)
+2. Open Glutamate and navigate to the Extensions section
+3. Find UI Assist and click "Install"
+4. The app will automatically configure everything for you and all locally
+
+### Option 2: Manual Setup
+
+If you prefer to set up UI Assist manually, you have two options:
+
+#### Global Installation
 
 ```bash
 npm install -g @glutamateapp/ui-assist
@@ -102,7 +115,7 @@ Once installed globally, you can run the server directly:
 ui-assist
 ```
 
-### Using npx
+#### Using npx
 
 You can run the server without installation using npx:
 
