@@ -114,7 +114,7 @@ The easiest way to install and set up UI Assist is through the Glutamate app:
 1. Download and install [Glutamate](https://glutamate.app)
 2. Open Glutamate and navigate to the Extensions section
 3. Find UI Assist and click "Install"
-4. The app will automatically configure everything for you and all locally
+4. The app will automatically configure everything for you and runs locally
 
 ### Option 2: Manual Setup
 
