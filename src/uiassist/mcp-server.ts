@@ -21,7 +21,7 @@ export class TestMcpServer {
   private readonly connectorPort: number;
   private readonly mcpPort: number;
 
-  constructor(connectorPort: number = 3025, mcpPort: number = DEFAULT_PORT) {
+  constructor(connectorPort: number = 9025, mcpPort: number = DEFAULT_PORT) {
     this.connectorPort = connectorPort;
     this.mcpPort = mcpPort;
     this.server = new McpServer(

@@ -144,8 +144,8 @@ npx @glutamateapp/ui-assist
 
 The server can be configured using:
 
-- `PORT`: Port for the MCP server (default: 3332)
-- `CONNECTOR_PORT`: Port for the browser connector (default: 3025)
+- `PORT`: Port for the MCP server (default: 7964)
+- `CONNECTOR_PORT`: Port for the browser connector (default: 9025)
 
 Examples:
 

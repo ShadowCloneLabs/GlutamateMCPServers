@@ -1,6 +1,6 @@
 {
   "name": "@glutamateapp/ui-assist",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "UI Assist MCP server is a server that connect with UI Assist chrome extension to help with UI based input in web development.",
   "license": "MIT",
   "author": "ShadowCloneResearchLabs",
