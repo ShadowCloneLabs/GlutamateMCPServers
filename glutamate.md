@@ -142,7 +142,7 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
   "runtimeRequirements": "Node.js",
   "packageName": "@glutamateapp/ui-assist",
   "color": "#FFFFFF",
-  "defaultPort": 3025,
+  "defaultPort": 7964,
   "imageUrl": "https://shadowclonelabs.com/ui-assist-icon.png",
   "tools": [
     {
@@ -159,7 +159,7 @@ Create a file named `mcp-server-metadata.json` in your repository with the follo
       "variableName": "CONNECTOR_PORT",
       "description": "Port for the browser connector",
       "isRequired": true,
-      "defaultValue": "3025"
+      "defaultValue": "9025"
     }
   ],
   "notes": {

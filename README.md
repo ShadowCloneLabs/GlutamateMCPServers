@@ -38,7 +38,9 @@ Key Features:
 - [x] Auto Sync (server config and port) with any client (cursor , windsurf , cline , roocode etc..) (Added in v0.0.5)
 - [ ] Auto start of mcp severs on start of glutamate (based on user settings)
 - [ ] Oath login for mcps to fetch api keys
+- [ ] Versioning of MCP servers for easier management and updates
 - [ ] User submission of servers
+- [ ] Direct Updater of Glutamate
 
 ## Custom Made Servers
 
@@ -126,7 +128,7 @@ Create a file named `glutamate.json` in your project root with the following str
       "variableName": "CONNECTOR_PORT",
       "description": "Port for the browser connector",
       "isRequired": false,
-      "defaultValue": "3025"
+      "defaultValue": "9025"
     }
   ]
 }
