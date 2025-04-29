@@ -10,6 +10,7 @@ export const DEFAULT_PORT = 7896;
 export const PUPPETEER_SKIP_DOWNLOAD = process.env.PUPPETEER_SKIP_DOWNLOAD === 'true' || process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD === 'true' || true;
 export const ALLOW_DANGEROUS_ARGS = process.env.ALLOW_DANGEROUS === 'false' || false;
 export const DOCKER_CONTAINER = process.env.DOCKER_CONTAINER === 'false' || false;
+export const PUPPETEER_HEADLESS = process.env.PUPPETEER_HEADLESS === 'true' || false;
 
 export function getConfiguredPort() {
   const args = process.argv.slice(2);

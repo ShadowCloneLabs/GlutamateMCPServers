@@ -17,7 +17,7 @@ import express from "express";
 import {IncomingMessage,ServerResponse} from "http";
 import { findChrome } from './chrome-finder.js';
 import puppeteerCore from 'puppeteer-core';
-import { ALLOW_DANGEROUS_ARGS, DEFAULT_PORT, DOCKER_CONTAINER, getConfiguredPort, getPuppeteerEnvConfig, PUPPETEER_SKIP_DOWNLOAD } from './config.js';
+import { ALLOW_DANGEROUS_ARGS, DEFAULT_PORT, DOCKER_CONTAINER, getConfiguredPort, getPuppeteerEnvConfig, PUPPETEER_HEADLESS, PUPPETEER_SKIP_DOWNLOAD } from './config.js';
 
 // Set environment variables for Puppeteer
 if (PUPPETEER_SKIP_DOWNLOAD) {
@@ -163,8 +163,8 @@ const TOOLS : Tool[] = [
           if(!browser) {
              // Use system Chrome instead of downloading Chromium
              const chromePath = await findChrome();
-             const baseNpxArgs: any = {headless: false};
-             const baseDockerArgs: any = {headless: true, args: ["--no-sandbox","--single-process","--no-zygote"]};
+             const baseNpxArgs: any = {headless: PUPPETEER_HEADLESS};
+             const baseDockerArgs: any = {headless: PUPPETEER_HEADLESS, args: ["--no-sandbox","--single-process","--no-zygote"]};
              
              try {
                if (!chromePath) {
