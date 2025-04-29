@@ -1,0 +1,37 @@
+{
+  "name": "@glutamateapp/puppeteer",
+  "version": "1.0.0",
+  "description": "MCP server for browser automation using Puppeteer",
+  "license": "MIT",
+  "author": "ShadowCloneResearchLabs",
+  "homepage": "https://github.com/ShadowCloneLabs/GlutamateMCPServers",
+  "bugs": "https://github.com/ShadowCloneLabs/GlutamateMCPServers/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShadowCloneLabs/GlutamateMCPServers.git"
+  },
+
+  "type": "module",
+  "bin": {
+    "puppeteer": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && shx chmod +x dist/*.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "puppeteer-core": "^23.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "shx": "^0.3.4",
+    "typescript": "^5.6.2"
+  }
+}
