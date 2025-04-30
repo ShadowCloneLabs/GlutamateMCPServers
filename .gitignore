@@ -138,4 +138,6 @@ dist
 src/uiassist/dist/*
 src/uiassist/node_modules/*
 
-
+src/apple-mcp/node_modules/*
+src/apple-mcp/dist/*
+src/apple-mcp/apple.json
