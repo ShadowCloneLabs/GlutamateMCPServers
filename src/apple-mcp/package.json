@@ -1,6 +1,6 @@
 {
  "name": "@glutamateapp/apple-mcp",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "module": "index.ts",
   "type": "module",
   "description": "Apple MCP tools for contacts, notes, messages, and mail integration",
