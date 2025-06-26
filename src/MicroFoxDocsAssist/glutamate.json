@@ -1,0 +1,57 @@
+{
+  "name": "MicroFox Docs Assist",
+  "description": "A Model Context Protocol server that provides documentation assistance for MicroFox. It helps process and respond to documentation queries using the MCP protocol.",
+  "version": "1.0.0",
+  "releaseDate": "2024-05-20",
+  "author": "Gluamate",
+  "license": "MIT",
+  "repositoryUrl": "https://github.com/your-username/your-repo",
+  "implementationLanguage": "TypeScript",
+  "connectionType": "sse",
+  "runtimeRequirements": "Node.js",
+  "packageName": "@glutamate/microfox-docs-assist",
+  "color": "#4CAF50",
+  "defaultPort": 7453,
+  "imageUrl": "https://example.com/server-icon.png",
+  "tools": [
+    {
+      "name": "listByPackage",
+      "description": "List documentation files for a given package."
+    },
+    {
+      "name": "semanticSearch",
+      "description": "Perform a semantic search on the documentation."
+    },
+    {
+      "name": "getFunctionDoc",
+      "description": "Get the documentation for a specific function in a package."
+    },
+    {
+      "name": "checkFunctionExists",
+      "description": "Check if a function's documentation exists within a package."
+    }
+  ],
+  "environmentVariables": [
+    {
+      "variableName": "PORT",
+      "description": "Port for the MCP server to listen on",
+      "isRequired": false,
+      "defaultValue": "7453"
+    },
+    {
+      "variableName": "SUPABASE_URL",
+      "description": "The URL of your Supabase project.",
+      "isRequired": true
+    },
+    {
+      "variableName": "SUPABASE_SERVICE_ROLE_KEY",
+      "description": "Your Supabase service role key.",
+      "isRequired": true
+    },
+    {
+      "variableName": "GEMINI_API_KEY",
+      "description": "Your Gemini API key for embeddings.",
+      "isRequired": true
+    }
+  ]
+}
